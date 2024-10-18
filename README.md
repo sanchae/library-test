@@ -22,11 +22,26 @@ api:
 get post
 http://localhost:8080/users
 
+{
+    "first_name": "",
+    "last_name": ""
+}
+
 get
 http://localhost:8080/books
 
 post
 http://localhost:8080/books/lend
 
+{
+    "book_id": int,
+    "user_id": int
+}
+
 post
 http://localhost:8080/books/return
+
+{
+    "book_id": int,
+    "user_id": int
+}
