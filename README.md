@@ -1,48 +1,44 @@
 # library-test
-
-V GoLang spiši API, ki mora vsebovati naslednje endpointe:
-- dodajanje uporabnika (uporabnik naj vsebuje le ime in priimek)
-- prikaz uporabnikov
-- prikaz knjig ki so na voljo za izposojo s količino (naziv knjige, količina)
-- izposoja knjige (kateri uporabnik katero knjigo)
-- vračanje knjige (kateri uporabnik katero knjigo)
-
-# run the container
 docker compose up --build
-
-# after container starts 
-install this as a cli tool: https://github.com/golang-migrate/migrate/blob/master/cmd/migrate/README.md
-
-run this command in your terminal: make migrate-up
 
 your database should have tables created and populated
 
-api:
+- prikaz uporabnikov
+```
+curl http://localhost:8080/users
+```
 
-get post
-http://localhost:8080/users
+- dodajanje uporabnika (uporabnik naj vsebuje le ime in priimek)
 ```
-{
-    "first_name": "",
-    "last_name": ""
-}
+curl -X POST http://localhost:8080/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "John",
+    "last_name": "Doe"
+  }'
 ```
-get
-http://localhost:8080/books
 
-post
-http://localhost:8080/books/lend
+- prikaz knjig ki so na voljo za izposojo s količino (naziv knjige, količina)
 ```
-{
-    "book_id": int,
-    "user_id": int
-}
+curl http://localhost:8080/books
 ```
-post
-http://localhost:8080/books/return
+
+- izposoja knjige (kateri uporabnik katero knjigo)
 ```
-{
-    "book_id": int,
-    "user_id": int
-}
+curl -X POST http://localhost:8080/books/lend \
+  -H "Content-Type: application/json" \
+  -d '{
+    "book_id": 1,
+    "user_id": 2
+  }'
+```
+
+- vračanje knjige (kateri uporabnik katero knjigo)
+```
+curl -X POST http://localhost:8080/books/return \
+  -H "Content-Type: application/json" \
+  -d '{
+    "book_id": 1,
+    "user_id": 2
+  }'
 ```
