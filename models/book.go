@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -12,21 +11,30 @@ type Book struct {
 }
 
 type BookList struct {
-	BookS []Book `json:"books"`
+	Books []Book `json:"books"`
 }
 
-func (i *Book) Bind(r *http.Request) error {
-	if i.BookTitle == "" {
-		return fmt.Errorf("booktitle is a required field")
-	}
-	if i.AvailableCopies == "" {
-		return fmt.Errorf("available copies is a required field")
-	}
-	return nil
+type LendBookRequest struct {
+	BookID int `json:"book_id"`
+	UserID int `json:"user_id"`
 }
+
+type ReturnBookRequest struct {
+	BookID int `json:"book_id"`
+	UserID int `json:"user_id"`
+}
+
 func (*BookList) Render(w http.ResponseWriter, r *http.Request) error {
     return nil
 }
 func (*Book) Render(w http.ResponseWriter, r *http.Request) error {
     return nil
+}
+
+func (l *LendBookRequest) Bind(r *http.Request) error {
+	return nil
+}
+
+func (l *ReturnBookRequest) Bind(r *http.Request) error {
+	return nil
 }
