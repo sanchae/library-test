@@ -11,7 +11,7 @@ V GoLang spiši API, ki mora vsebovati naslednje endpointe:
 docker compose up --build
 
 # after container starts 
-install this as a cli tool: https://github.com/golang-migrate/migrate
+install this as a cli tool: https://github.com/golang-migrate/migrate/blob/master/cmd/migrate/README.md
 
 run this command in your terminal: make migrate-up
 
@@ -21,27 +21,28 @@ api:
 
 get post
 http://localhost:8080/users
-
+```
 {
     "first_name": "",
     "last_name": ""
 }
-
+```
 get
 http://localhost:8080/books
 
 post
 http://localhost:8080/books/lend
-
+```
 {
     "book_id": int,
     "user_id": int
 }
-
+```
 post
 http://localhost:8080/books/return
-
+```
 {
     "book_id": int,
     "user_id": int
 }
+```
